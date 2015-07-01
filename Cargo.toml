@@ -1,0 +1,4 @@
+[package]
+name = "spicy"
+version = "0.1.0"
+authors = ["Ted <ted@weaksignal.tynopex.net>"]
