@@ -1,0 +1,6 @@
+# Sample.spicy
+CV 3.3 0 1
+R 10k 0 1
+R 1k 1 2
+R 4700 0 2
+CC 10m 0 2
