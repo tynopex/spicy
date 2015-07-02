@@ -12,6 +12,7 @@ use std::io::BufReader;
 use std::io::BufRead;
 
 use super::{Graph,ElementType,Element,Net};
+use super::linalg::Float;
 
 
 fn load_spicy(fname: &str) -> Option<Graph>
@@ -53,11 +54,11 @@ fn load_spicy(fname: &str) -> Option<Graph>
     None
 }
 
-fn parse_value(s: &str) -> f32
+fn parse_value(s: &str) -> Float
 {
     let idx = s.rfind(char::is_alphabetic);
 
-    let mut val: f32 = match idx {
+    let mut val: Float = match idx {
         Some(i) => &s[..i],
         None => s,
         }
@@ -67,7 +68,7 @@ fn parse_value(s: &str) -> f32
     if idx.is_some()
     {
         let i = idx.unwrap();
-        let scale: f32 = match &s[i..] {
+        let scale: Float = match &s[i..] {
             "p" => 1e-12,
             "n" => 1e-9,
             "u" => 1e-6,

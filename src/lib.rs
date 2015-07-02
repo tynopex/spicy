@@ -1,5 +1,7 @@
+#![feature(iter_arith)]
 #![allow(dead_code)]
 
+mod linalg;
 mod fileformat;
 
 
@@ -18,7 +20,7 @@ enum ElementType
 struct Element
 {
     kind: ElementType,
-    value: f32,
+    value: linalg::Float,
     nets: Nets,
 }
 
