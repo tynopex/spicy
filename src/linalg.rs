@@ -5,12 +5,12 @@ pub type Float = f64;
 
 pub struct Matrix
 {
-    data: Vec<Vec<Float>>,
+    pub data: Vec<Vec<Float>>,
 }
 
 pub struct Vector
 {
-    data: Vec<f64>,
+    pub data: Vec<f64>,
 }
 
 impl fmt::Display for Matrix
@@ -62,7 +62,7 @@ fn inner_product(a: &[Float], b: &[Float]) -> Float
 }
 
 // Gauss-Seidel solver for Ax=b
-fn gauss_seidel(a: &Matrix, b: &Vector, eps: Float, max: usize) -> Vector
+pub fn gauss_seidel(a: &Matrix, b: &Vector, eps: Float, max: usize) -> Vector
 {
     let a = &a.data;
     let b = &b.data;
@@ -115,5 +115,13 @@ impl Matrix
     pub fn new(n: usize, m: usize) -> Matrix
     {
         Matrix { data: vec![vec![0.0; m]; n] }
+    }
+}
+
+impl Vector
+{
+    pub fn new(n: usize) -> Vector
+    {
+        Vector { data: vec![0.0; n] }
     }
 }
