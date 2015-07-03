@@ -109,3 +109,11 @@ fn mat_mul_vec(a: &Matrix, x: &Vector) -> Vector
 
     Vector { data: b }
 }
+
+impl Matrix
+{
+    pub fn new(n: usize, m: usize) -> Matrix
+    {
+        Matrix { data: vec![vec![0.0; m]; n] }
+    }
+}

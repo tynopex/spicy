@@ -15,7 +15,7 @@ use super::{Graph,ElementType,Element,Net};
 use super::linalg::Float;
 
 
-fn load_spicy(fname: &str) -> Option<Graph>
+pub fn load_spicy(fname: &str) -> Option<Graph>
 {
     let f = File::open(fname).unwrap();
 
@@ -51,7 +51,7 @@ fn load_spicy(fname: &str) -> Option<Graph>
         gr.nodes.push(el);
     }
     
-    None
+    Some(gr)
 }
 
 fn parse_value(s: &str) -> Float

@@ -8,8 +8,8 @@ mod fileformat;
 type Net = u32;
 type Nets = (Net,Net);
 
-#[derive(Debug)]
-enum ElementType
+#[derive(Debug,Eq,PartialEq)]
+pub enum ElementType
 {
     Resistor,
     ConstantVoltage,
@@ -17,14 +17,14 @@ enum ElementType
 }
 
 #[derive(Debug)]
-struct Element
+pub struct Element
 {
     kind: ElementType,
     value: linalg::Float,
     nets: Nets,
 }
 
-struct Graph
+pub struct Graph
 {
     nodes: Vec<Element>,
 }
