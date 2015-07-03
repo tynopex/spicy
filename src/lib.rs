@@ -3,6 +3,7 @@
 
 mod linalg;
 mod fileformat;
+mod solve;
 
 
 type Net = u32;
