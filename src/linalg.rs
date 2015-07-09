@@ -21,7 +21,7 @@ impl fmt::Display for Matrix
         {
             for el in row
             {
-                try!(write!(f, "{:9.4} ", el));
+                try!(write!(f, "{:9.3} ", el));
             }
             try!(write!(f, "\n"));
         }
@@ -36,7 +36,7 @@ impl fmt::Display for Vector
     {
         for el in self.data.iter()
         {
-            try!(write!(f, "{:9.4} ", el));
+            try!(write!(f, "{:9.3} ", el));
         }
         try!(write!(f, "\n"));
 
