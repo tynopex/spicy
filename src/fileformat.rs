@@ -65,9 +65,8 @@ fn parse_value(s: &str) -> Float
         .parse()
         .unwrap();
 
-    if idx.is_some()
+    if let Some(i) = idx
     {
-        let i = idx.unwrap();
         let scale: Float = match &s[i..] {
             "p" => 1e-12,
             "n" => 1e-9,
