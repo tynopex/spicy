@@ -1,7 +1,24 @@
 use std::cmp;
-use super::{Graph,ElementType};
-use super::linalg::{Matrix,Vector};
+use super::{Graph,ElementType,SimResult};
+use super::linalg::{Matrix,Vector,gaussian_elimination};
 
+
+pub fn solve(gr: &Graph) -> SimResult
+{
+    let (a,b) = build_eqns(gr);
+
+    // Solve Ax = b
+    let x = gaussian_elimination(&a, &b);
+
+    // Save results
+    let n = count_nets(gr);
+    let (v,i) = x.data.split_at(n);
+
+    SimResult {
+        v: v.to_vec(),
+        i: i.to_vec(),
+        }
+}
 
 fn build_eqns(gr: &Graph) -> (Matrix,Vector)
 {
