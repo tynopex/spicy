@@ -1,4 +1,4 @@
-#![feature(iter_arith)]
+#![feature(iter_arith,slice_patterns,advanced_slice_patterns,convert)]
 #![allow(dead_code)]
 
 mod linalg;
