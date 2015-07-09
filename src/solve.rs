@@ -39,7 +39,7 @@ fn build_eqns(gr: &Graph) -> (Matrix,Vector)
             a.data[i][na] -= 1.0;
             a.data[i][nb] += 1.0;
 
-            a.data[i][n+i] = -elem.value;
+            a.data[i][n+i] = elem.value;
         }
     }
 
