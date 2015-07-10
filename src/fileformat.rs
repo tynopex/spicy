@@ -26,7 +26,7 @@ pub fn load_spicy(fname: &str) -> Option<Graph>
         let line = line.unwrap();
         let line = line.trim();
 
-        if line.starts_with("#")
+        if line.starts_with("#") || line == ""
         {
             continue;
         }
