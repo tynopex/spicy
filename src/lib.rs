@@ -15,6 +15,8 @@ pub enum ElementType
     Resistor,
     ConstantVoltage,
     ConstantCurrent,
+    DependentVoltage,
+    DependentCurrent,
 }
 
 #[derive(Debug)]

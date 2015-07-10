@@ -38,6 +38,8 @@ pub fn load_spicy(fname: &str) -> Option<Graph>
             "R" => ElementType::Resistor,
             "CV" => ElementType::ConstantVoltage,
             "CC" => ElementType::ConstantCurrent,
+            "DV" => ElementType::DependentVoltage,
+            "DC" => ElementType::DependentCurrent,
             _ => panic!("Unknown type"),
             };
 
