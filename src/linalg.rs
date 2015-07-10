@@ -17,7 +17,7 @@ impl fmt::Display for Matrix
 {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result
     {
-        for row in self.data.iter()
+        for row in &self.data
         {
             for el in row
             {
@@ -34,7 +34,7 @@ impl fmt::Display for Vector
 {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result
     {
-        for el in self.data.iter()
+        for el in &self.data
         {
             try!(write!(f, "{:9.3} ", el));
         }
@@ -64,9 +64,10 @@ pub fn gaussian_elimination(a: &Matrix, b: &Vector) -> Vector
 
     // Augmented matrix
     let mut aug: Vec<AugRow> =
-        a.data.iter().cloned()
-         .zip(b.data.iter().cloned())
-         .collect();
+        a.data.iter()
+              .cloned()
+              .zip(b.data.iter().cloned())
+              .collect();
 
     // Row-echelon form
     for j in 0..m
@@ -84,7 +85,7 @@ pub fn gaussian_elimination(a: &Matrix, b: &Vector) -> Vector
 
                 for (pp,rr) in pivot.0.iter()
                                       .cloned()
-                                      .zip(row.0.iter_mut())
+                                      .zip(&mut row.0)
                 {
                     (*rr) *= scale;
                     (*rr) -= pp;
@@ -179,10 +180,10 @@ fn mat_mul_vec(a: &Matrix, x: &Vector) -> Vector
     let n = a.len();
     let mut b = vec![0.0; n];
 
-    for (el,row) in b.iter_mut().zip(a.iter())
+    for (el,row) in b.iter_mut().zip(a)
     {
         *el = row.iter()
-                 .zip(x.iter())
+                 .zip(x)
                  .map(|e| e.0 * e.1)
                  .sum();
     }
