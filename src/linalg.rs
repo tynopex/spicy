@@ -72,14 +72,13 @@ pub fn gaussian_elimination(a: &Matrix, b: &Vector) -> Vector
     // Row-echelon form
     for j in 0..m
     {
-        let mut rows: Vec<AugRowRef> =
+        let mut rows =
             aug.iter_mut()
-               .filter(|x| x.0[j] != 0.0 && x.0[..j].iter().all(|y| *y == 0.0))
-               .collect();
+               .filter(|x| x.0[j] != 0.0 && x.0[..j].iter().all(|y| *y == 0.0));
 
-        if let [ref pivot, ref mut other..] = rows.as_mut_slice()
+        if let Some(pivot) = rows.next()
         {
-            for ref mut row in other.iter_mut()
+            for row in rows
             {
                 let scale = pivot.0[j] / row.0[j];
 
