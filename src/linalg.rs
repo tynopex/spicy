@@ -53,7 +53,7 @@ pub fn gaussian_elimination(a: &Matrix, b: &Vector) -> Vector
     {
         row.0.iter()
              .cloned()
-             .take_while(|&x| x == 0.0)
+             .take_while(|x| *x == 0.0)
              .count()
     }
 
@@ -74,7 +74,7 @@ pub fn gaussian_elimination(a: &Matrix, b: &Vector) -> Vector
     {
         let mut rows: Vec<AugRowRef> =
             aug.iter_mut()
-               .filter(|x| x.0[j] != 0.0 && x.0[..j].iter().all(|&y| y == 0.0))
+               .filter(|x| x.0[j] != 0.0 && x.0[..j].iter().all(|y| *y == 0.0))
                .collect();
 
         if let [ref pivot, ref mut other..] = rows.as_mut_slice()
