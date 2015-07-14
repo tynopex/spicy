@@ -74,7 +74,7 @@ pub fn gaussian_elimination(a: &Matrix, b: &Vector) -> Vector
     {
         let mut rows =
             aug.iter_mut()
-               .filter(|x| x.0[j] != 0.0 && x.0[..j].iter().all(|y| *y == 0.0));
+               .filter(|x| leading_zeros(x) == j);
 
         if let Some(pivot) = rows.next()
         {
