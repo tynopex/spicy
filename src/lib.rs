@@ -1,9 +1,9 @@
 #![feature(iter_arith)]
 #![allow(dead_code)]
 
-mod linalg;
-mod fileformat;
-mod solve;
+pub mod linalg;
+pub mod fileformat;
+pub mod solve;
 
 
 type Net = u32;
@@ -34,8 +34,8 @@ pub struct Graph
 
 pub struct SimResult
 {
-    v: Vec<linalg::Float>,
-    i: Vec<linalg::Float>,
+    pub v: Vec<linalg::Float>,
+    pub i: Vec<linalg::Float>,
 }
 
 
