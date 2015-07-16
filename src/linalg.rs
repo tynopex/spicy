@@ -10,7 +10,7 @@ pub struct Matrix
 
 pub struct Vector
 {
-    pub data: Vec<f64>,
+    pub data: Vec<Float>,
 }
 
 impl fmt::Display for Matrix
@@ -129,7 +129,7 @@ fn euclidean_dist(a: &[Float], b: &[Float]) -> Float
     a.iter()
      .zip(b)
      .map(|(xa,xb)| (xa-xb)*(xa-xb))
-     .sum::<Float>()
+     .fold(0.0, |s,x| s + x)
      .sqrt()
 }
 
@@ -138,7 +138,7 @@ fn inner_product(a: &[Float], b: &[Float]) -> Float
     a.iter()
      .zip(b)
      .map(|(xa,xb)| xa*xb)
-     .sum()
+     .fold(0.0, |s,x| s + x)
 }
 
 // Gauss-Seidel solver for Ax=b
@@ -184,7 +184,7 @@ fn mat_mul_vec(a: &Matrix, x: &Vector) -> Vector
         *el = row.iter()
                  .zip(x)
                  .map(|e| e.0 * e.1)
-                 .sum();
+                 .fold(0.0, |s,x| s + x)
     }
 
     Vector { data: b }

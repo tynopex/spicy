@@ -1,4 +1,3 @@
-#![feature(iter_arith)]
 #![allow(dead_code)]
 
 pub mod linalg;
