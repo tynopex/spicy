@@ -11,7 +11,7 @@ use std::fs::File;
 use std::io::BufReader;
 use std::io::BufRead;
 
-use super::{Graph,ElementType,Element,Net};
+use super::{Graph,ElementType,Element,Nets};
 use super::linalg::Float;
 
 
@@ -32,7 +32,7 @@ pub fn load_spicy(fname: &str) -> Option<Graph>
         }
 
         let parts: Vec<&str> = line.split_whitespace().collect();
-        assert!(parts.len() == 4);
+        assert!(parts.len() >= 2);
 
         let kind = match parts[0] {
             "R" => ElementType::Resistor,
@@ -45,10 +45,11 @@ pub fn load_spicy(fname: &str) -> Option<Graph>
 
         let val = parse_value(parts[1]);
 
-        let net_a: Net = parts[2].parse().unwrap();
-        let net_b: Net = parts[3].parse().unwrap();
+        let nets = parts[2..].into_iter()
+                             .map(|x| x.parse().unwrap())
+                             .collect::<Nets>();
 
-        let el = Element { kind: kind, value: val, nets: (net_a,net_b) };
+        let el = Element { kind: kind, value: val, nets: nets };
 
         gr.nodes.push(el);
     }

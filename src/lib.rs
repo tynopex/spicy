@@ -6,7 +6,7 @@ pub mod solve;
 
 
 type Net = u32;
-type Nets = (Net,Net);
+type Nets = Vec<Net>;
 
 #[derive(Debug,Eq,PartialEq)]
 pub enum ElementType

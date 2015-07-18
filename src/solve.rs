@@ -1,4 +1,3 @@
-use std::cmp;
 use super::{Graph,Element,ElementType,SimResult};
 use super::linalg::{Matrix,Vector,gaussian_elimination};
 
@@ -32,8 +31,8 @@ fn build_eqns(gr: &Graph) -> (Matrix,Vector)
 
     for (i,elem) in gr.nodes.iter().enumerate()
     {
-        let na = elem.nets.0 as usize;
-        let nb = elem.nets.1 as usize;
+        let na = elem.nets[0] as usize;
+        let nb = elem.nets[1] as usize;
 
         // Current flow / adjacency
         a.data[m+na][n+i] += 1.0;
@@ -67,8 +66,8 @@ fn build_eqns(gr: &Graph) -> (Matrix,Vector)
         {
             if let Some(ref_elem) = prev
             {
-                let ref_na = ref_elem.nets.0 as usize;
-                let ref_nb = ref_elem.nets.1 as usize;
+                let ref_na = ref_elem.nets[0] as usize;
+                let ref_nb = ref_elem.nets[1] as usize;
 
                 // Reference should be dummy
                 assert!(ref_elem.value == 0.0);
@@ -120,7 +119,10 @@ fn count_nets(gr: &Graph) -> usize
 {
     // Find highest numbered node
     let max = gr.nodes.iter()
-                      .map(|el| cmp::max(el.nets.0, el.nets.1))
+                      .map(|el| el.nets.iter()
+                                       .cloned()
+                                       .max()
+                                       .unwrap_or(0))
                       .max()
                       .unwrap_or(0) as usize;
 
