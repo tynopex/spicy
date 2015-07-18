@@ -72,6 +72,15 @@ pub fn gaussian_elimination(a: &Matrix, b: &Vector) -> Vector
              .count()
     }
 
+    fn sort_aug(aug: &mut Vec<AugRow>, col: usize)
+    {
+        use std::cmp::{PartialOrd,Ordering};
+
+        aug.sort_by(|l,r|
+            r.0[col].abs().partial_cmp(&l.0[col].abs())
+                          .unwrap_or(Ordering::Equal));
+    }
+
  // let n = a.data.len();
     let m = a.data[0].len();
 
@@ -87,6 +96,8 @@ pub fn gaussian_elimination(a: &Matrix, b: &Vector) -> Vector
     // Row-echelon form
     for j in 0..m
     {
+        sort_aug(&mut aug, j);
+
         let mut rows =
             aug.iter_mut()
                .filter(|x| leading_zeros(x) == j);
