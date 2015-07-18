@@ -1,4 +1,5 @@
 use std::fmt;
+use std::ops::Deref;
 
 
 pub type Float = f64;
@@ -11,6 +12,20 @@ pub struct Matrix
 pub struct Vector
 {
     pub data: Vec<Float>,
+}
+
+impl Deref for Matrix
+{
+    type Target = Vec<Vec<Float>>;
+
+    fn deref(&self) -> &Self::Target { &self.data }
+}
+
+impl Deref for Vector
+{
+    type Target = Vec<Float>;
+
+    fn deref(&self) -> &Self::Target { &self.data }
 }
 
 impl fmt::Display for Matrix
