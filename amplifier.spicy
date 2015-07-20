@@ -1,0 +1,15 @@
+# Inverting Amplifier based on dependant source
+
+# Amplifier Input
+CV 2    0 1
+R  1k   1 2
+
+# Op-amp
+CC 0    2 0
+DV 100k 0 3
+
+# Feedback
+R  4k   3 2
+
+# Load
+R 100   3 0
